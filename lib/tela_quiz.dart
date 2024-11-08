@@ -86,46 +86,52 @@ class _TelaQuizState extends State<TelaQuiz> {
     Navigator.pop(context); // Tela Inicial
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Quiz Doctor'),
-        backgroundColor: const Color.fromARGB(255, 30, 49, 218),
-      ),
-      body: Column(
-        children: [
-          Image.asset(
-            'lib/assets/tardis_doctor_who.jpg',
-            height: 300,
-            width: double.infinity,
-            fit: BoxFit.fitHeight,
-          ),
-          Expanded(
-            child: _questionIndex < _questions.length
-                ? Column(
-                    children: [
-                      Text(
-                        _questions[_questionIndex]['questionText'].toString(),
-                        style: TextStyle(fontSize: 20),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 10),
-                      ...(_questions[_questionIndex]['answers']
-                              as List<Map<String, Object>>)
-                          .map((answer) {
-                        return ElevatedButton(
-                          onPressed: () =>
-                              _answerQuestion(answer['score'] as int),
-                          child: Text(answer['text'].toString()),
-                        );
-                      }).toList(),
-                    ],
-                  )
-                : Center(child: Text('Finalizando Quiz...')),
-          ),
-        ],
-      ),
-    );
-  }
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: Text('Quiz Doctor'),
+      backgroundColor: const Color.fromARGB(255, 30, 49, 218),
+    ),
+    body: Column(
+      children: [
+        Image.asset(
+          'lib/assets/tardis_doctor_who.jpg',
+          height: 300,
+          width: double.infinity,
+          fit: BoxFit.fitHeight,
+        ),
+        Expanded(
+          child: _questionIndex < _questions.length
+              ? Column(
+                  children: [
+                    Text(
+                      _questions[_questionIndex]['questionText'].toString(),
+                      style: TextStyle(fontSize: 20),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(height: 10),
+                    ...(_questions[_questionIndex]['answers']
+                            as List<Map<String, Object>>)
+                        .map((answer) {
+                      return Column(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () =>
+                                _answerQuestion(answer['score'] as int),
+                            child: Text(answer['text'].toString()),
+                          ),
+                          SizedBox(height: 8),
+                        ],
+                      );
+                    }).toList(),
+                  ],
+                )
+              : Center(child: Text('Finalizando Quiz...')),
+        ),
+      ],
+    ),
+  );
+}
+
 }
