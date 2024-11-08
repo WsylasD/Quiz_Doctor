@@ -83,7 +83,7 @@ class _TelaQuizState extends State<TelaQuiz> {
       _questionIndex = 0;
       _totalScore = 0;
     });
-    Navigator.pop(context); // Retorna para a tela inicial
+    Navigator.pop(context); // Tela Inicial
   }
 
   @override
@@ -91,6 +91,7 @@ class _TelaQuizState extends State<TelaQuiz> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Quiz Doctor'),
+        backgroundColor: const Color.fromARGB(255, 30, 49, 218),
       ),
       body: Column(
         children: [
@@ -109,6 +110,7 @@ class _TelaQuizState extends State<TelaQuiz> {
                         style: TextStyle(fontSize: 20),
                         textAlign: TextAlign.center,
                       ),
+                      SizedBox(height: 10),
                       ...(_questions[_questionIndex]['answers']
                               as List<Map<String, Object>>)
                           .map((answer) {

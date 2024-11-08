@@ -21,11 +21,14 @@ class TelaResultado extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Resultado do Quiz'),
+        backgroundColor: Colors.blueAccent,
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Image.asset('lib/assets/11-doctor.jpg'),
+            SizedBox(height: 20),
             Text(
               resultPhrase,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
@@ -35,7 +38,7 @@ class TelaResultado extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 resetQuiz();
-                Navigator.pop(context); // Volta para a TelaInicial
+                Navigator.pop(context); // Tela Inicial
               },
               child: Text('Reiniciar Quiz'),
             ),
