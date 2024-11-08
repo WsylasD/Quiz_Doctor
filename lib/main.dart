@@ -8,8 +8,8 @@ class QuizApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Meu App de Quiz',
-      theme: ThemeData(primarySwatch: const Color.fromARGB(255, 44, 74, 207)),
-      home: TelaInicial(),
+      theme: ThemeData(primarySwatch: Colors.amber), 
+      home: TelaInicial(), 
     );
   }
 }
