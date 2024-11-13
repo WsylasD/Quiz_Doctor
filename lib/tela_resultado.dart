@@ -8,11 +8,11 @@ class TelaResultado extends StatelessWidget {
 
   String get resultPhrase {
     if (totalScore == 5) {
-      return 'Parabéns! Você acertou todas!';
-    } else if (totalScore == 3) {
-      return 'Bom trabalho!';
+      return 'PARABÉNS! VOCÊ ACERTOU TODAS AS PERGUNTAS!';
+    } else if (totalScore >= 3) {
+      return 'BOM TRABALHO!';
     } else {
-      return 'Precisa de mais prática.';
+      return 'PRECISA DE MAIS PRATICA';
     }
   }
 
@@ -27,20 +27,66 @@ class TelaResultado extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('lib/assets/11-doctor.jpg'),
-            SizedBox(height: 20),
-            Text(
-              resultPhrase,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
+            Container(
+              height: 500,
+              width: 500,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: const Color.fromARGB(255, 27, 31, 216),
+                  width: 3,
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset('lib/assets/11-doctor.jpg',
+                  height: 500,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.blueAccent,
+                border: Border.all(color: Colors.blue.shade900, width: 2),
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 6,
+                    offset: Offset(2, 2),
+                  ),
+                ],
+              ),
+              child: Text(
+                  resultPhrase,
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                  ),
+            ),
+            const SizedBox(height: 10),
+            Container(
+              padding: const EdgeInsets.all(10),
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.lightBlue,
+              ),
+                      child: Text(
+                        totalScore.toString(),
+                        style: const TextStyle(fontSize: 24, color: Colors.white),
+                        textAlign: TextAlign.center,
+                      ),
+              ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 resetQuiz();
-                Navigator.pop(context); // Tela Inicial
+                Navigator.pop(context);
               },
-              child: Text('Reiniciar Quiz'),
+              child: const Text('Reiniciar Quiz'),
             ),
           ],
         ),

@@ -83,7 +83,7 @@ class _TelaQuizState extends State<TelaQuiz> {
       _questionIndex = 0;
       _totalScore = 0;
     });
-    Navigator.pop(context); // Tela Inicial
+    Navigator.pop(context);
   }
 
 @override
