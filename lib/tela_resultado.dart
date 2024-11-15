@@ -20,30 +20,27 @@ class TelaResultado extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Resultado do Quiz'),
-        backgroundColor: Colors.blueAccent,
+        title: const Text('Resultado do Quiz'),
+        backgroundColor: const Color.fromARGB(255, 51, 38, 236),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              height: 500,
-              width: 500,
+              height: 350,
+              width: 350,
               decoration: BoxDecoration(
                 border: Border.all(
                   color: const Color.fromARGB(255, 27, 31, 216),
                   width: 3,
                 ),
-                borderRadius: BorderRadius.circular(8),
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.asset('lib/assets/11-doctor.jpg',
-                  height: 500,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
-                ),
+              child: Image.asset(
+                'lib/assets/11-doctor.jpg',
+                height: double.infinity,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
             ),
             const SizedBox(height: 20),
@@ -62,10 +59,11 @@ class TelaResultado extends StatelessWidget {
                 ],
               ),
               child: Text(
-                  resultPhrase,
-                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  textAlign: TextAlign.center,
-                  ),
+                resultPhrase,
+                style:
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
             ),
             const SizedBox(height: 10),
             Container(
@@ -74,12 +72,12 @@ class TelaResultado extends StatelessWidget {
                 shape: BoxShape.circle,
                 color: Colors.lightBlue,
               ),
-                      child: Text(
-                        totalScore.toString(),
-                        style: const TextStyle(fontSize: 24, color: Colors.white),
-                        textAlign: TextAlign.center,
-                      ),
+              child: Text(
+                totalScore.toString(),
+                style: const TextStyle(fontSize: 24, color: Colors.white),
+                textAlign: TextAlign.center,
               ),
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {

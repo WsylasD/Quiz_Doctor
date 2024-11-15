@@ -6,20 +6,30 @@ class TelaInicial extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bem-vindo ao Doctor Quiz'),
-        backgroundColor: Colors.blue,
+        title: const Text('Bem-vindo ao Doctor Quiz'),
+        backgroundColor: const Color.fromARGB(255, 51, 38, 236),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset(
-              'lib/assets/the_doctors.jpg', 
+            Container(
               height: 300,
-              width: double.infinity,
-              fit: BoxFit.fitHeight, 
+              width: 570,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: const Color.fromRGBO(60, 58, 192, 0.808),
+                  width: 3,
+                ),
+              ),
+              child: Image.asset(
+              'lib/assets/the_doctors.jpg', 
+                height: 300,
+                width: double.infinity,
+                fit: BoxFit.fitHeight, 
+              ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -27,7 +37,7 @@ class TelaInicial extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => TelaQuiz()),
                 );
               },
-              child: Text('Começar Quiz'),
+              child: const Text('Começar Quiz'),
             ),
           ],
         ),

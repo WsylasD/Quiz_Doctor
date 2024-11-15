@@ -10,6 +10,7 @@ class _TelaQuizState extends State<TelaQuiz> {
   final _questions = [
     {
       'questionText': 'Qual a melhor serie de televisão Britanica?',
+      'image': 'lib/assets/doctor_looking_outside.jpg',
       'answers': [
         {'text': 'Friends', 'score': 0},
         {'text': 'The big Bang Theory', 'score': 0},
@@ -19,6 +20,7 @@ class _TelaQuizState extends State<TelaQuiz> {
     },
     {
       'questionText': 'Quem é o Doutor?',
+      'image': 'lib/assets/best_doctors.jpg',
       'answers': [
         {'text': 'Dr. Shaun Murphy', 'score': 0},
         {'text': 'Dr. House', 'score': 0},
@@ -28,6 +30,7 @@ class _TelaQuizState extends State<TelaQuiz> {
     },
     {
       'questionText': 'Quem é o maior inimigo do Doutor?',
+      'image': 'lib/assets/enemies_doctor.jpg',
       'answers': [
         {'text': 'Uma Maçã', 'score': 0},
         {'text': 'Daleks', 'score': 1},
@@ -36,22 +39,24 @@ class _TelaQuizState extends State<TelaQuiz> {
       ],
     },
     {
-      'questionText': 'Qual médico é conhecido como o "pai da vacina"?',
+      'questionText':
+          'Quantos "doutores" existiram no momento atual da historia?',
+      'image': 'lib/assets/doctors_line.jpg',
       'answers': [
-        {'text': 'Louis Pasteur', 'score': 0},
-        {'text': 'Edward Jenner', 'score': 1},
-        {'text': 'Alexander Fleming', 'score': 0},
-        {'text': 'William Harvey', 'score': 0},
+        {'text': '17', 'score': 1},
+        {'text': '8', 'score': 0},
+        {'text': '21', 'score': 0},
+        {'text': '15', 'score': 0},
       ],
     },
     {
-      'questionText':
-          'Quem foi responsável pela descoberta da penicilina, o primeiro antibiótico eficaz?',
+      'questionText': 'Qual o nome do veiculo de transporte do "Doutor"?',
+      'image': 'lib/assets/tardis_art.jpg',
       'answers': [
         {'text': 'Marie Curie', 'score': 0},
-        {'text': 'Joseph Lister', 'score': 0},
-        {'text': 'Alexander Fleming', 'score': 1},
-        {'text': 'Robert Koch', 'score': 0},
+        {'text': 'Gerty Cori', 'score': 0},
+        {'text': 'Elizabeth Blackwell ', 'score': 0},
+        {'text': 'TARDIS', 'score': 1},
       ],
     },
   ];
@@ -60,12 +65,13 @@ class _TelaQuizState extends State<TelaQuiz> {
   int _totalScore = 0;
 
   void _answerQuestion(int score) {
-    setState(() {
-      _totalScore += score;
-      _questionIndex += 1;
-    });
+    _totalScore += score;
 
-    if (_questionIndex >= _questions.length) {
+    if (_questionIndex + 1 < _questions.length) {
+      setState(() {
+        _questionIndex += 1;
+      });
+    } else {
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -86,52 +92,83 @@ class _TelaQuizState extends State<TelaQuiz> {
     Navigator.pop(context);
   }
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: Text('Quiz Doctor'),
-      backgroundColor: const Color.fromARGB(255, 30, 49, 218),
-    ),
-    body: Column(
-      children: [
-        Image.asset(
-          'lib/assets/tardis_doctor_who.jpg',
-          height: 300,
-          width: double.infinity,
-          fit: BoxFit.fitHeight,
-        ),
-        Expanded(
-          child: _questionIndex < _questions.length
-              ? Column(
-                  children: [
-                    Text(
-                      _questions[_questionIndex]['questionText'].toString(),
-                      style: TextStyle(fontSize: 20),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 10),
-                    ...(_questions[_questionIndex]['answers']
-                            as List<Map<String, Object>>)
-                        .map((answer) {
-                      return Column(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () =>
-                                _answerQuestion(answer['score'] as int),
-                            child: Text(answer['text'].toString()),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Quiz Doctor'),
+        backgroundColor: const Color.fromARGB(255, 51, 38, 236),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const SizedBox(height: 10),
+            Container(
+              height: 300,
+              width: 400,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: const Color.fromRGBO(60, 58, 192, 0.808),
+                  width: 2,
+                ),
+              ),
+              child: Image.asset(
+                _questions[_questionIndex]['image'].toString(),
+                height: 250,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(height: 10),
+            Expanded(
+              child: _questionIndex < _questions.length
+                  ? Column(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: Colors.blueAccent,
+                            border: Border.all(
+                                color: Colors.blue.shade900, width: 2),
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Color.fromARGB(255, 72, 69, 216),
+                                blurRadius: 6,
+                                offset: Offset(2, 2),
+                              ),
+                            ],
                           ),
-                          SizedBox(height: 8),
-                        ],
-                      );
-                    }).toList(),
-                  ],
-                )
-              : Center(child: Text('Finalizando Quiz...')),
+                          child: Text(
+                            _questions[_questionIndex]['questionText']
+                                .toString(),
+                            style: const TextStyle(fontSize: 20),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        ...(_questions[_questionIndex]['answers']
+                                as List<Map<String, Object>>)
+                            .map((answer) {
+                          return Column(
+                            children: [
+                              ElevatedButton(
+                                onPressed: () =>
+                                    _answerQuestion(answer['score'] as int),
+                                child: Text(answer['text'].toString()),
+                              ),
+                              const SizedBox(height: 8),
+                            ],
+                          );
+                        }),
+                      ],
+                    )
+                  : const Center(child: Text('Finalizando Quiz...')),
+            ),
+          ],
         ),
-      ],
-    ),
-  );
-}
-
+      ),
+    );
+  }
 }

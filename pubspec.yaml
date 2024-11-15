@@ -56,6 +56,12 @@ flutter:
     - lib/assets/11-doctor.jpg
     - lib/assets/the_doctors.jpg
     - lib/assets/tardis_doctor_who.jpg
+    - lib/assets/doctor_looking_outside.jpg
+    - lib/assets/doctors_line.jpg
+    - lib/assets/enemies_doctor.jpg
+    - lib/assets/tardis_art.jpg
+    - lib/assets/best_doctors.jpg
+    
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
