@@ -2,12 +2,12 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'tela_resultado.dart';
 
-class TelaQuiz extends StatefulWidget {
+class TelaQuiz1 extends StatefulWidget {
   @override
   _TelaQuizState createState() => _TelaQuizState();
 }
 
-class _TelaQuizState extends State<TelaQuiz> {
+class _TelaQuizState extends State<TelaQuiz1> {
   final _questions = [
     {
       'questionText': 'Qual a melhor serie de televisão Britanica?',
@@ -40,8 +40,7 @@ class _TelaQuizState extends State<TelaQuiz> {
       ],
     },
     {
-      'questionText':
-          'Quantos "doutores" existiram no momento atual da historia?',
+      'questionText':'Quantos "doutores" existiram no momento atual da historia?',
       'image': 'lib/assets/doctors_line.jpg',
       'answers': [
         {'text': '17', 'score': 1},
@@ -181,7 +180,7 @@ class _TelaQuizState extends State<TelaQuiz> {
 
                           return Column(
                             children: [
-                              GestureDetector( // Dectector de 
+                              GestureDetector(
                                 onTap: _showingAnswer
                                     ? null // Desativa os cliques durante o feedback
                                     : () =>

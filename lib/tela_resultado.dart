@@ -16,6 +16,17 @@ class TelaResultado extends StatelessWidget {
     }
   }
 
+  String _getResultImage() {
+  if (totalScore == 5) {
+    return 'lib/assets/doctor_5_points.jpg'; 
+  } else if (totalScore >= 3) {
+    return 'lib/assets/doctor_3_points.jpg'; 
+  } else {
+    return 'lib/assets/doctor_0_points.jpg'; 
+  }
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +48,7 @@ class TelaResultado extends StatelessWidget {
                 ),
               ),
               child: Image.asset(
-                'lib/assets/11-doctor.jpg',
+                _getResultImage(), // imagem de acordo com o resultado
                 height: double.infinity,
                 width: double.infinity,
                 fit: BoxFit.cover,

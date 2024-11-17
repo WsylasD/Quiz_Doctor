@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'tela_quiz.dart';
+import 'tela_quiz_1.dart';
+import 'tela_quiz_2.dart';
 
 class TelaInicial extends StatelessWidget {
   @override
@@ -23,21 +24,36 @@ class TelaInicial extends StatelessWidget {
                 ),
               ),
               child: Image.asset(
-              'lib/assets/the_doctors.jpg', 
+                'lib/assets/the_doctors.jpg',
                 height: 300,
                 width: double.infinity,
-                fit: BoxFit.fitHeight, 
+                fit: BoxFit.fitHeight,
               ),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => TelaQuiz()),
-                );
-              },
-              child: const Text('Começar Quiz'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center, // Espaçamento entre botões
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TelaQuiz1()),
+                    );
+                  },
+                  child: const Text('Quiz 1 - Normal'),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => TelaQuiz2()),
+                    );
+                  },
+                  child: const Text('Quiz 2 - Dificil'),
+                ),
+              ],
             ),
           ],
         ),

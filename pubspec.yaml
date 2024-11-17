@@ -53,7 +53,6 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - lib/assets/11-doctor.jpg
     - lib/assets/the_doctors.jpg
     - lib/assets/tardis_doctor_who.jpg
     - lib/assets/doctor_looking_outside.jpg
@@ -61,6 +60,14 @@ flutter:
     - lib/assets/enemies_doctor.jpg
     - lib/assets/tardis_art.jpg
     - lib/assets/best_doctors.jpg
+    - lib/assets/doctor_0_points.jpg
+    - lib/assets/doctor_3_points.jpg
+    - lib/assets/doctor_5_points.jpg
+    - lib/assets/doctor_companions.jpg
+    - lib/assets/doctor_nemesis.jpg
+    - lib/assets/doctor_who_regen.jpg
+    - lib/assets/tardis_interior.jpg
+    - lib/assets/RiverSong.jpg
     
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
