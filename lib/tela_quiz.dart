@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'tela_resultado.dart';
 
@@ -63,31 +64,44 @@ class _TelaQuizState extends State<TelaQuiz> {
 
   int _questionIndex = 0;
   int _totalScore = 0;
+  bool _showingAnswer = false; 
+  int? _selectedAnswer; 
 
-  void _answerQuestion(int score) {
-    _totalScore += score;
+  void _answerQuestion(int score, int index) {
+    if (_showingAnswer) return; // Impede cliques adicionais enquanto mostra a resposta
+    setState(() {
+      _totalScore += score;
+      _showingAnswer = true;
+      _selectedAnswer = index;
+    });
 
-    if (_questionIndex + 1 < _questions.length) {
-      setState(() {
-        _questionIndex += 1;
-      });
-    } else {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => TelaResultado(
-            totalScore: _totalScore,
-            resetQuiz: _resetQuiz,
+    Future.delayed(const Duration(seconds: 2), () { // Tempo de delay entre uma pergunta e outra -> seconds: x
+      if (_questionIndex + 1 < _questions.length) {
+        setState(() {
+          _questionIndex++;
+          _showingAnswer = false;
+          _selectedAnswer = null;
+        });
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TelaResultado(
+              totalScore: _totalScore,
+              resetQuiz: _resetQuiz,
+            ),
           ),
-        ),
-      );
-    }
+        );
+      }
+    });
   }
 
   void _resetQuiz() {
     setState(() {
       _questionIndex = 0;
       _totalScore = 0;
+      _showingAnswer = false;
+      _selectedAnswer = null;
     });
     Navigator.pop(context);
   }
@@ -132,13 +146,6 @@ class _TelaQuizState extends State<TelaQuiz> {
                             border: Border.all(
                                 color: Colors.blue.shade900, width: 2),
                             borderRadius: BorderRadius.circular(10),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Color.fromARGB(255, 72, 69, 216),
-                                blurRadius: 6,
-                                offset: Offset(2, 2),
-                              ),
-                            ],
                           ),
                           child: Text(
                             _questions[_questionIndex]['questionText']
@@ -150,13 +157,53 @@ class _TelaQuizState extends State<TelaQuiz> {
                         const SizedBox(height: 20),
                         ...(_questions[_questionIndex]['answers']
                                 as List<Map<String, Object>>)
-                            .map((answer) {
+                            .asMap()
+                            .entries
+                            .map((entry) {
+                          final index = entry.key;
+                          final answer = entry.value;
+                          final isCorrect = answer['score'] == 1;
+                          final isSelected = _selectedAnswer == index;
+
+                          // Define a cor do botão
+                          final Color buttonColor;
+                          if (_showingAnswer) {
+                            if (isCorrect) {
+                              buttonColor = Colors.green; // Correto
+                            } else if (isSelected) {
+                              buttonColor = Colors.red; // Errado
+                            } else {
+                              buttonColor = Colors.grey; // Neutro
+                            }
+                          } else {
+                            buttonColor = Colors.blue; // Azul padrão
+                          }
+
                           return Column(
                             children: [
-                              ElevatedButton(
-                                onPressed: () =>
-                                    _answerQuestion(answer['score'] as int),
-                                child: Text(answer['text'].toString()),
+                              GestureDetector( // Dectector de 
+                                onTap: _showingAnswer
+                                    ? null // Desativa os cliques durante o feedback
+                                    : () =>
+                                        _answerQuestion(answer['score'] as int, index),
+                                child: Container(
+                                  height: 45,
+                                  width: 200,
+                                  padding: const EdgeInsets.symmetric(vertical: 12),
+                                  margin: const EdgeInsets.symmetric(vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: buttonColor,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    answer['text'].toString(),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
                               ),
                               const SizedBox(height: 8),
                             ],
