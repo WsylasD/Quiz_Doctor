@@ -7,6 +7,10 @@ class TelaInicial extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Image.asset('lib/assets/tardis_icon.png'),
+          ),
           title: const Text('Doctor Quiz'),
           backgroundColor: const Color.fromARGB(255, 51, 38, 236),
         ),
