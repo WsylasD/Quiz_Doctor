@@ -68,6 +68,8 @@ flutter:
     - lib/assets/doctor_who_regen.jpg
     - lib/assets/tardis_interior.jpg
     - lib/assets/RiverSong.jpg
+    - lib/assets/background.jpg
+    - lib/assets/background_questions.jpg
     
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class TelaResultado extends StatelessWidget {
   final int totalScore;
+  final int totalQuestions;
   final VoidCallback resetQuiz;
 
-  TelaResultado({required this.totalScore, required this.resetQuiz});
+  TelaResultado({required this.totalScore,  required this.totalQuestions, required this.resetQuiz});
 
   String get resultPhrase {
     if (totalScore == 5) {
@@ -31,10 +32,18 @@ class TelaResultado extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Resultado do Quiz'),
+        title: const Text('Resultado Quiz'),
         backgroundColor: const Color.fromARGB(255, 51, 38, 236),
       ),
-      body: Center(
+      body: 
+      Container( // Background
+      decoration: const BoxDecoration( 
+        image: DecorationImage(
+          image: AssetImage('lib/assets/background.jpg'),
+          fit: BoxFit.cover, 
+        ),
+      ),
+      child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -58,33 +67,35 @@ class TelaResultado extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: Colors.blueAccent,
+                image: const DecorationImage(
+                  image:
+                    AssetImage('lib/assets/background_questions.jpg'),
+                    fit: BoxFit.cover,
+                ),
                 border: Border.all(color: Colors.blue.shade900, width: 2),
-                borderRadius: BorderRadius.circular(10),
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.black26,
-                    blurRadius: 6,
-                    offset: Offset(2, 2),
-                  ),
-                ],
+                borderRadius: BorderRadius.circular(10)
               ),
               child: Text(
                 resultPhrase,
                 style:
-                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.white),
                 textAlign: TextAlign.center,
               ),
             ),
             const SizedBox(height: 10),
             Container(
               padding: const EdgeInsets.all(10),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.lightBlue,
+              decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image:
+                    AssetImage('lib/assets/background_questions.jpg'),
+                  fit: BoxFit.cover,
+                ),
+                border: Border.all(color: Colors.blue.shade900, width: 2),
+                borderRadius: BorderRadius.circular(100)
               ),
               child: Text(
-                totalScore.toString(),
+                '$totalScore/$totalQuestions',
                 style: const TextStyle(fontSize: 24, color: Colors.white),
                 textAlign: TextAlign.center,
               ),
@@ -100,6 +111,6 @@ class TelaResultado extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }
